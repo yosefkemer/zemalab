@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zema Diagnostic Laboratory</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Custom CSS for dark theme and layout -->
+    <style>
+        body {
+            font-family: 'Nunito', 'Roboto', Arial, Helvetica, sans-serif;
+            background: #f8f9fa; /* light gray */
+            color: #212529; /* dark text */
+            min-height: 100vh;
+        }
+        /* Accent and palette */
+        .accent {
+            color: #0D6EFD;
+        }
+        .accent-bg {
+            background: #0D6EFD;
+            color: #fff;
+        }
+        .accent-teal {
+            color: #20c997;
+        }
+        .accent-green {
+            color: #198754;
+        }
+        /* Navbar styles - modern medical look */
+        .navbar {
+            background: #fff !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+        .navbar .navbar-brand {
+            color: #0D6EFD !important;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+        }
+        .navbar .navbar-brand img {
+            height: 32px;
+            filter: none;
+        }
+        .navbar-nav .nav-link {
+            color: #0D6EFD !important;
+            font-weight: 500;
+            font-size: 1.08rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background 0.2s, color 0.2s, border-bottom 0.2s;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            background: rgba(13,110,253,0.08);
+            color: #0D6EFD !important;
+            text-decoration: underline;
+        }
+        .navbar-nav .nav-link.active {
+            color: #0D6EFD !important;
+            border-bottom: 3px solid #0D6EFD;
+            font-weight: 700;
+            background: none;
+            text-decoration: none;
+        }
+        /* HERO SECTION styles - updated for 70vh height, edge-to-edge */
+        .hero-section, #heroCarousel, .carousel-inner, .carousel-item, .hero-bg {
+            width: 100vw;
+            min-height: 60vh;
+            height: 60vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .hero-section {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: none;
+            overflow: hidden;
+        }
+        .hero-bg {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            width: 100vw;
+            min-height: 60vh;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* Light overlay for hero image */
+        .hero-bg .hero-light-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+        .carousel-inner, .carousel-item {
+            width: 100vw;
+            min-height: 60vh;
+            height: 60vh;
+        }
+        .hero-overlay {
+            z-index: 2;
+            pointer-events: none;
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        /* HERO OVERLAY: Modern floating heading with gradient, blur, and white text */
+        .hero-overlay h1 {
+            color: #fff;
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 24px #0d6efd55, 0 1px 2px #0008;
+            background: linear-gradient(90deg, rgba(13,110,253,0.85) 0%, rgba(32,201,151,0.75) 100%);
+            border-radius: 1.5rem;
+            padding: 1.25rem 2.5rem;
+            box-shadow: 0 8px 32px rgba(13,110,253,0.10);
+            backdrop-filter: blur(6px);
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        @media (max-width: 768px) {
+            .hero-overlay h1 {
+                font-size: 1.2rem;
+                padding: 0.75rem 1.25rem;
+            }
+        }
+        /* Position hero text lower (bottom third) for dynamic look */
+        .hero-overlay {
+            justify-content: flex-end;
+            padding-bottom: 8vh;
+        }
+        /* HERO SECTION: Carousel images 80% width, max 90% height, centered, and reduce overall hero height */
+        .hero-bg-img {
+            width: 80vw;
+            max-width: 80vw;
+            height: 90vh;
+            max-height: 90vh;
+            object-fit: cover;
+            object-position: center;
+            background: #e9ecef;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            .hero-section, #heroCarousel, .carousel-inner, .carousel-item, .hero-bg {
+                min-height: 32vh !important;
+                height: 32vh !important;
+            }
+            .hero-bg-img {
+                width: 95vw;
+                max-width: 95vw;
+                height: 32vh;
+                max-height: 32vh;
+            }
+        }
+        /* Remove overlay button spacing */
+        .hero-overlay .btn {
+            display: none;
+        }
+        /* SERVICES SECTION: Upgraded to Bootstrap cards and grid with icons and light backgrounds */
+        .service-card {
+            background: #fff;
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 2px 16px rgba(13,110,253,0.07);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .service-card:hover {
+            box-shadow: 0 6px 32px rgba(13,110,253,0.13);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            color: #0D6EFD;
+            margin-bottom: 1rem;
+        }
+        /* FOOTER SECTION: Upgraded with Bootstrap grid/flex utilities */
+        footer.section-darker {
+            background: #f8f9fa !important;
+            color: #212529;
+            border-top: 1px solid #e9ecef;
+        }
+        footer a.accent {
+            color: #0D6EFD;
+            text-decoration: underline;
+        }
+        footer a.accent:hover {
+            color: #198754;
+        }
+        /* Section spacing for clean, airy look */
+        section {
+            margin-bottom: 2.5rem;
+        }
+        /* Consistent button style for all accent buttons */
+        .btn.accent-bg, .accent-bg.btn, .btn-accent {
+            background: #0D6EFD !important;
+            color: #fff !important;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            font-size: 1.15rem;
+            padding: 0.75rem 2.5rem;
+            box-shadow: 0 2px 12px rgba(13,110,253,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn.accent-bg:hover, .accent-bg.btn:hover, .btn-accent:hover,
+        .btn.accent-bg:focus, .accent-bg.btn:focus, .btn-accent:focus {
+            background: #0b5ed7 !important;
+            color: #fff !important;
+            box-shadow: 0 4px 18px rgba(13,110,253,0.15);
+        }
+        /* Modal polish: border radius and shadow */
+        .modal-content {
+            border-radius: 1.25rem !important;
+            box-shadow: 0 8px 32px rgba(13,110,253,0.10) !important;
+        }
+        /* Section headings consistent color and spacing */
+        h2.fw-bold {
+            color: #0D6EFD !important;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+        }
+        /* Responsive tweaks for section spacing */
+        @media (max-width: 768px) {
+            section {
+                margin-bottom: 1.25rem;
+            }
+            .hero-section, #heroCarousel, .carousel-inner, .carousel-item, .hero-bg, .hero-overlay {
+                min-height: 40vh !important;
+                height: 40vh !important;
+            }
+            .hero-overlay h1 { font-size: 1.5rem; }
+            .service-card { padding: 1.25rem 0.75rem; }
+        }
+        /* Add more custom styles as needed for each section */
+    </style>
+</head>
+<body>
+    <!-- HEADER: Lab logo/name and navigation -->
+    <!-- Updated: Modern, clean, medical navbar with light background and blue accents -->
+    <header>
+        <nav class="navbar navbar-expand-lg py-3 shadow-sm">
+            <div class="container">
+                <!-- Lab Logo and Name -->
+                <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                    <img src="images/zemalogo.png" alt="Zema Diagnostic Laboratory Logo">
+                    <span class="accent">Zema Diagnostic Laboratory</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto gap-lg-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn accent-bg ms-lg-4 mt-3 mt-lg-0 px-4 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#bookingModal" style="white-space:nowrap;">Book Now</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End HEADER -->
+
+    <!-- HERO SECTION: Modern, clean, medical hero with light overlay and blue accents -->
+    <section class="hero-section overflow-hidden p-0">
+        <div id="heroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="4000">
+            <!-- Carousel indicators (page dots) -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner h-100">
+                <!-- Slide 1: image with rotating heading -->
+                <div class="carousel-item active h-100">
+                    <div class="hero-bg d-flex align-items-center justify-content-center h-100 w-100 position-relative p-0">
+                        <img src="images/medical equipments.png" alt="Advanced Hematology Testing" class="hero-bg-img">
+                        <div class="hero-overlay position-absolute z-2 d-flex flex-column align-items-center justify-content-center w-100 h-100 text-center">
+                            <h1 class="fw-bold mb-3">Advanced Hematology Testing for Your Health</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2: image with rotating heading -->
+                <div class="carousel-item h-100">
+                    <div class="hero-bg d-flex align-items-center justify-content-center h-100 w-100 position-relative p-0">
+                        <img src="images/med_equipments.png" alt="Fast & Reliable Results" class="hero-bg-img">
+                        <div class="hero-overlay position-absolute z-2 d-flex flex-column align-items-center justify-content-center w-100 h-100 text-center">
+                            <h1 class="fw-bold mb-3">Fast & Reliable Results with Our Modern Analyzers</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3: image with rotating heading -->
+                <div class="carousel-item h-100">
+                    <div class="hero-bg d-flex align-items-center justify-content-center h-100 w-100 position-relative p-0">
+                        <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=1200&q=80" alt="Comprehensive Laboratory Services" class="hero-bg-img">
+                        <div class="hero-overlay position-absolute z-2 d-flex flex-column align-items-center justify-content-center w-100 h-100 text-center">
+                            <h1 class="fw-bold mb-3">Comprehensive Laboratory Services Tailored for You</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- No carousel controls (arrows) -->
+        </div>
+    </section>
+    <!-- End HERO SECTION -->
+
+    <!-- Bootstrap Modal: Booking Form (triggered by Book Now button) -->
+    <!-- Upgraded: Booking modal to modern, beautiful, professional look -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-0 border-0" style="background:linear-gradient(135deg,#f8fbff 60%,#e3f6ff 100%);color:#212529;border-radius:1.5rem;box-shadow:0 8px 40px 0 rgba(13,110,253,0.13);">
+          <div class="modal-header border-0 pb-0" style="border-radius:1.5rem 1.5rem 0 0;">
+            <div class="w-100 text-center">
+              <span class="d-inline-block mb-2" style="font-size:2.2rem;color:#0D6EFD;"><i class="bi bi-calendar2-check"></i></span>
+              <h5 class="modal-title accent fw-bold" id="bookingModalLabel" style="font-size:1.5rem;">Book an Appointment</h5>
+            </div>
+            <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4 py-3">
+            <!-- Simple Booking Form -->
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label fw-semibold">Full Name</label>
+                <input type="text" class="form-control rounded-pill shadow-sm" id="name" required placeholder="Enter your full name">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control rounded-pill shadow-sm" id="email" required placeholder="you@email.com">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label fw-semibold">Preferred Date</label>
+                <input type="date" class="form-control rounded-pill shadow-sm" id="date" required>
+              </div>
+              <div class="mb-3">
+                <label for="service" class="form-label fw-semibold">Service</label>
+                <select class="form-select rounded-pill shadow-sm" id="service" required>
+                  <option value="">Select a service</option>
+                  <option>Complete Blood Count (CBC)</option>
+                  <option>Lipid Profile</option>
+                  <option>Serum Electrolytes</option>
+                  <option>Cardiac Markers</option>
+                  <option>Cancer Markers</option>
+                  <option>Vitamin Panels</option>
+                  <option>Infection & Inflammation Markers</option>
+                  <option>General Health Screening</option>
+                </select>
+              </div>
+              <button type="submit" class="btn accent-bg w-100 rounded-pill py-2 fs-5 shadow">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Booking Modal -->
+
+    <!-- ABOUT SECTION: Brief description -->
+    <section id="about" class="py-5" style="background:#fff;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold accent mb-3">About Zema Diagnostic Laboratory</h2>
+                    <p class="lead" style="color:#495057;">
+                        Zema Diagnostic Laboratory is committed to providing accurate, timely, and reliable medical testing in a modern, patient-friendly environment. Our expert team uses state-of-the-art equipment and follows the highest standards of quality and care. We support healthcare providers and empower patients with trusted diagnostic information for better health outcomes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End ABOUT SECTION -->
+
+    <!-- SERVICES SECTION: Upgraded to Bootstrap cards and grid with icons and light backgrounds -->
+    <section id="services" class="py-5" style="background:#f8f9fa;">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold accent mb-3">Our Diagnostic Services</h2>
+                    <p class="lead" style="color:#495057;">
+                        Zema Diagnostic Laboratory offers a comprehensive range of medical tests and health screenings, using advanced technology and expert staff to ensure accuracy, reliability, and patient trust.
+                    </p>
+                </div>
+            </div>
+            <!-- Upgraded: Bootstrap cards for each service with icons and light backgrounds -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-droplet-half accent"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent">Complete Blood Count (CBC) & Hematology Tests</h4>
+                            <p class="card-text">We perform comprehensive blood analyses to detect anemia, infections, parasitic diseases, blood cancers, and other critical conditions. Our advanced analyzers ensure precise results that guide effective treatments. Regular monitoring helps track recovery and adjust care promptly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-heart-pulse accent-teal"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent-teal">Lipid Profile</h4>
+                            <p class="card-text">Assess your heart health with our detailed lipid testing, including HDL, LDL, and total cholesterol levels. Knowing your lipid profile is essential for preventing cardiovascular diseases and managing long-term wellness.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-lightning-charge accent-green"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent-green">Serum Electrolytes</h4>
+                            <p class="card-text">We measure key electrolytes like sodium (Na+), potassium (K+), calcium (Ca++), and chloride (Cl-). Balanced electrolytes are vital for nerve function, muscle contractions, and overall fluid balance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-activity accent"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent">Cardiac Markers</h4>
+                            <p class="card-text">Early detection saves lives. Our tests include CK, CPK, and Troponin to assess heart function and catch cardiac issues before they escalate.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-shield-check accent-teal"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent-teal">Cancer Markers</h4>
+                            <p class="card-text">We provide screening for important cancer indicators such as CA-125 and ASP, offering early insights into possible malignancies and supporting timely intervention.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-capsule-pill accent-green"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent-green">Vitamin Panels</h4>
+                            <p class="card-text">Deficiencies in vitamins D, A, and E can lead to serious health complications. Our detailed panels identify these gaps so you can take corrective action.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-virus accent"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent">Infection & Inflammation Markers</h4>
+                            <p class="card-text">Testing for CRP, RF, ASO and more helps diagnose hidden infections or inflammatory conditions that might otherwise go unnoticed.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card service-card h-100 text-center">
+                        <div class="service-icon mb-2"><i class="bi bi-clipboard-pulse accent-teal"></i></div>
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold accent-teal">General Health Screening & Monitoring</h4>
+                            <p class="card-text">We offer full evaluations of your health status, detecting conditions early and tracking treatment effectiveness to ensure your best possible outcome.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bootstrap cards for services -->
+        </div>
+    </section>
+    <!-- End SERVICES SECTION -->
+
+    <!-- CTA SECTION: Upgraded with Bootstrap grid and modal trigger -->
+    <section class="py-5" style="background:#f8f9fa;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3 accent">Ready to take control of your health?</h2>
+                    <p class="lead mb-4" style="color:#495057;">
+                        Book your tests or a consultation with Zema Diagnostic Laboratory today. Our expert team is here to provide you with accurate, timely, and reliable results.
+                    </p>
+                    <button type="button" class="btn accent-bg btn-lg px-5 shadow" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End CTA SECTION -->
+
+    <!-- FOOTER SECTION: Upgraded with Bootstrap grid/flex utilities -->
+    <footer id="contact" class="section-darker py-4 mt-auto">
+        <div class="container">
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-md-8 mb-2 mb-md-0">
+                    <span class="me-3 d-block d-md-inline"><strong>Email:</strong> <a href="mailto:info@zemalab.com" class="accent" style="text-decoration:none;">info@zemalab.com</a></span>
+                    <span class="d-block d-md-inline"><strong>Phone:</strong> <a href="tel:+1234567890" class="accent" style="text-decoration:none;">+1 (234) 567-890</a></span>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <small style="color:#8fa1b3;">&copy; 2025 Zema Diagnostic Laboratory. All rights reserved.</small>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <a href="https://kemerhabesha.com" target="_blank" rel="noopener" class="d-inline-flex align-items-center gap-2" style="font-size:1.08rem;color:#0D6EFD;font-weight:600;text-decoration:none;">
+                        <img src="images/Kemer_Kicon_color.jpg" alt="Kemer Habesha Icon" style="height:28px;width:auto;vertical-align:middle;border-radius:6px;box-shadow:0 2px 8px #0d6efd22;">
+                        Powered by Kemer Habesha
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End FOOTER SECTION -->
+
+    <!-- Bootstrap JS (for components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
