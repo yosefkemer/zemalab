@@ -498,12 +498,13 @@
 
         .service-card {
             background: var(--bg-primary);
-            padding: 2.5rem;
+            padding: 1.75rem;
             border-radius: var(--radius-2xl);
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-slow);
             position: relative;
             overflow: hidden;
+            height: fit-content;
         }
 
         .service-card::before {
@@ -528,16 +529,16 @@
         }
 
         .service-icon {
-            width: 4rem;
-            height: 4rem;
+            width: 3rem;
+            height: 3rem;
             border-radius: var(--radius-xl);
             background: var(--light-blue);
             color: var(--primary-blue);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
             transition: all var(--transition-normal);
             position: relative;
             z-index: 2;
@@ -550,8 +551,8 @@
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            margin-bottom: 0;
             color: var(--text-primary);
             position: relative;
             z-index: 2;
@@ -559,10 +560,11 @@
 
         .service-card p {
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
             position: relative;
             z-index: 2;
+            font-size: 0.95rem;
         }
 
         .service-features {
@@ -575,8 +577,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .service-features li::before {
@@ -905,7 +908,7 @@
             <div class="navbar-content">
                 <a href="#home" class="navbar-brand">
                     <img src="images/zemalogo.png" alt="Zema Logo">
-                    Zema Diagnostic Laboratory
+                    Zema Lab
                 </a>
                 
                 <ul class="navbar-nav">
@@ -1083,10 +1086,12 @@
             
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-icon">
-                        <i class="bi bi-droplet-half"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-droplet-half"></i>
+                        </div>
+                        <h3>Hematology</h3>
                     </div>
-                    <h3>Hematology</h3>
                     <p>Complete blood count (CBC) and comprehensive blood analysis to detect anemia, infections, and other critical conditions.</p>
                     <ul class="service-features">
                         <li>Complete Blood Count (CBC)</li>
@@ -1097,10 +1102,12 @@
                 </div>
                 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-icon">
-                        <i class="bi bi-heart-pulse"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <h3>Clinical Chemistry</h3>
                     </div>
-                    <h3>Clinical Chemistry</h3>
                     <p>Detailed biochemical analysis including lipid profiles, liver function, and kidney function tests.</p>
                     <ul class="service-features">
                         <li>Lipid Profile</li>
@@ -1111,10 +1118,12 @@
                 </div>
                 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-icon">
-                        <i class="bi bi-lightning-charge"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h3>Electrolytes & Minerals</h3>
                     </div>
-                    <h3>Electrolytes & Minerals</h3>
                     <p>Measurement of essential electrolytes and minerals for optimal body function and metabolic health.</p>
                     <ul class="service-features">
                         <li>Sodium & Potassium</li>
@@ -1125,10 +1134,12 @@
                 </div>
                 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-icon">
-                        <i class="bi bi-activity"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <h3>Cardiac Markers</h3>
                     </div>
-                    <h3>Cardiac Markers</h3>
                     <p>Early detection of heart conditions with comprehensive cardiac enzyme testing and biomarkers.</p>
                     <ul class="service-features">
                         <li>Troponin I & T</li>
@@ -1139,10 +1150,12 @@
                 </div>
                 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-icon">
-                        <i class="bi bi-shield-check"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Cancer Markers</h3>
                     </div>
-                    <h3>Cancer Markers</h3>
                     <p>Screening for important cancer indicators for early detection and monitoring treatment response.</p>
                     <ul class="service-features">
                         <li>PSA (Prostate)</li>
@@ -1153,10 +1166,12 @@
                 </div>
                 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="service-icon">
-                        <i class="bi bi-capsule-pill"></i>
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="bi bi-capsule-pill"></i>
+                        </div>
+                        <h3>Vitamin & Hormones</h3>
                     </div>
-                    <h3>Vitamin & Hormones</h3>
                     <p>Comprehensive vitamin and hormone testing to identify deficiencies and optimize health.</p>
                     <ul class="service-features">
                         <li>Vitamin D, B12, Folate</li>
