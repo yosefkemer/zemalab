@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Amharic Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
@@ -21,8 +24,8 @@
     <!-- Custom Styles -->
     <style>
         :root {
-            --primary-blue: #0066cc;
-            --secondary-blue: #4da6ff;
+            --primary-blue: #1E70E9;
+            --secondary-blue: #2A85FF;
             --accent-green: #00cc88;
             --deep-blue: #003d7a;
             --light-blue: #e6f3ff;
@@ -38,7 +41,7 @@
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafb;
             --bg-dark: #1a1a1a;
-            --bg-gradient: linear-gradient(135deg, #0066cc 0%, #4da6ff 100%);
+            --bg-gradient: linear-gradient(135deg, #1E70E9 0%, #2A85FF 100%);
             --bg-gradient-light: linear-gradient(135deg, #e6f3ff 0%, #ffffff 100%);
             
             --border-light: #e5e7eb;
@@ -80,6 +83,16 @@
             overflow-x: hidden;
         }
 
+        /* Amharic Typography */
+        [lang="am"] {
+            font-family: 'Noto Sans Ethiopic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            direction: ltr;
+        }
+
+        [lang="am"] h1, [lang="am"] h2, [lang="am"] h3, [lang="am"] h4, [lang="am"] h5, [lang="am"] h6 {
+            font-family: 'Noto Sans Ethiopic', serif;
+        }
+
         /* Typography */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
@@ -118,85 +131,223 @@
             padding: 0 1rem;
         }
 
-        /* Navigation */
+        /* Modern Navigation Header */
         .navbar {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
             transition: all var(--transition-normal);
-            padding: 1rem 0;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(30, 112, 233, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow-lg);
-            padding: 0.75rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 0.5rem 0;
         }
 
         .navbar-content {
-            display: flex;
-            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: grid;
+            grid-template-columns: auto auto 1fr auto;
             align-items: center;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
         }
 
-        .navbar-brand {
+        .navbar.scrolled .navbar-content {
+            padding: 15px 30px;
+        }
+
+        /* Logo Section */
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-blue);
+            gap: 15px;
             text-decoration: none;
+            white-space: nowrap;
         }
 
-        .navbar-brand img {
-            height: 40px;
-            width: auto;
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(30, 112, 233, 0.25);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            overflow: hidden;
+            background: white;
+        }
+
+        .navbar.scrolled .logo-icon {
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-section:hover .logo-icon {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .navbar.scrolled .logo-icon img {
+            border-radius: 12px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2px;
+            line-height: 1;
+        }
+
+        .company-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1E70E9;
+            letter-spacing: -0.3px;
+            line-height: 1.1;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            white-space: nowrap;
+        }
+
+        .navbar.scrolled .company-name {
+            font-size: 20px;
+        }
+
+        .company-name-amharic {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+            line-height: 1.1;
+            margin: 0;
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+            white-space: nowrap;
+        }
+
+        .navbar.scrolled .company-name-amharic {
+            font-size: 13px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 3px;
+            gap: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Navigation Links */
+        .nav-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            justify-self: end;
         }
 
         .navbar-nav {
             display: flex;
-            gap: 2rem;
+            gap: 0.75rem;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        .navbar-nav a {
-            color: var(--text-primary);
+        .nav-link {
             text-decoration: none;
+            color: #475569;
+            font-size: 15px;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-md);
-            transition: all var(--transition-normal);
             position: relative;
+            padding: 10px 16px;
+            transition: color 0.3s ease;
+            border-radius: var(--radius-md);
+            white-space: nowrap;
         }
 
-        .navbar-nav a::after {
+        .nav-link:hover {
+            color: #1E70E9;
+            background: rgba(30, 112, 233, 0.08);
+        }
+
+        .nav-link.active {
+            color: #1E70E9;
+        }
+
+        .nav-link.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary-blue);
-            transform: translateX(-50%);
-            transition: width var(--transition-normal);
+            bottom: -2px;
+            left: 16px;
+            right: 16px;
+            height: 3px;
+            background: #1E70E9;
+            border-radius: 2px;
         }
 
-        .navbar-nav a:hover,
-        .navbar-nav a.active {
-            color: var(--primary-blue);
-            background: var(--light-blue);
+        .lang-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            min-width: 50px;
+            justify-content: center;
         }
 
-        .navbar-nav a:hover::after,
-        .navbar-nav a.active::after {
-            width: 80%;
+        .lang-btn:hover {
+            color: #475569;
+            background: rgba(30, 112, 233, 0.05);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #1E70E9;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Action Buttons */
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .btn {
@@ -218,10 +369,13 @@
             background: var(--bg-gradient);
             color: var(--text-white);
             box-shadow: var(--shadow-md);
+            font-size: 14px;
+            padding: 10px 20px;
+            white-space: nowrap;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
             box-shadow: var(--shadow-lg);
         }
 
@@ -283,6 +437,11 @@
             justify-content: center;
         }
 
+        .mobile-menu .language-switcher {
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -291,6 +450,7 @@
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--light-blue) 100%);
             position: relative;
             overflow: hidden;
+            margin-top: 100px;
         }
 
         .hero::before {
@@ -528,6 +688,13 @@
             opacity: 0.05;
         }
 
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .service-icon {
             width: 3rem;
             height: 3rem;
@@ -538,10 +705,10 @@
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
-            margin-bottom: 1rem;
             transition: all var(--transition-normal);
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
         }
 
         .service-card:hover .service-icon {
@@ -606,14 +773,6 @@
             padding: 2rem;
             position: relative;
         }
-
-        .process-step {
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-        }
-
-        /* Remove the problematic connecting lines for now - they were causing the gray rectangles */
 
         .process-number {
             width: 3rem;
@@ -751,13 +910,6 @@
             color: var(--text-white);
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
         /* Modal */
         .modal {
             display: none;
@@ -825,17 +977,172 @@
         .form-control:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            box-shadow: 0 0 0 3px rgba(30, 112, 233, 0.1);
+        }
+
+        /* Enhanced Footer Styling */
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .powered-by {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .powered-by:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .powered-by-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .powered-by-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+
+        .powered-by-label {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .powered-by-brand {
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff, #e6f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-content > * {
+            animation: slideDown 0.6s ease forwards;
+        }
+
+        .logo-section {
+            animation-delay: 0.1s;
+        }
+
+        .navbar-nav {
+            animation-delay: 0.2s;
+        }
+
+        .navbar-actions {
+            animation-delay: 0.3s;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar-nav {
+            .navbar-content {
+                grid-template-columns: auto 1fr auto;
+                gap: 15px;
+            }
+            
+            .language-switcher {
+                order: 2;
+                justify-self: end;
+                margin-right: 10px;
+            }
+            
+            .nav-section {
                 display: none;
             }
 
             .mobile-menu-toggle {
                 display: block;
+                order: 3;
+            }
+
+            .navbar-actions {
+                gap: 0.5rem;
+            }
+
+            .navbar-actions .btn-primary span {
+                display: none;
+            }
+
+            .navbar-actions .btn-primary {
+                padding: 0.75rem;
+            }
+
+            .language-switcher {
+                margin-right: 0.5rem;
+            }
+
+            .navbar-content {
+                padding: 15px 20px;
+            }
+
+            .navbar.scrolled .navbar-content {
+                padding: 12px 20px;
+            }
+
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .navbar.scrolled .logo-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .company-name {
+                font-size: 22px;
+            }
+
+            .navbar.scrolled .company-name {
+                font-size: 20px;
+            }
+
+            .company-name-amharic {
+                font-size: 14px;
+            }
+
+            .navbar.scrolled .company-name-amharic {
+                font-size: 13px;
+            }
+
+            .hero {
+                margin-top: 85px;
             }
 
             .hero-content {
@@ -861,10 +1168,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .process-step {
-                padding: 1.5rem;
-            }
-
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -877,12 +1180,47 @@
                 grid-template-columns: 1fr;
             }
 
+            .service-card {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
             h3 { font-size: 1.5rem; }
         }
 
         @media (max-width: 480px) {
+            .navbar-content {
+                padding: 12px 15px;
+            }
+
+            .logo-section {
+                gap: 12px;
+            }
+
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .navbar.scrolled .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .company-name {
+                font-size: 20px;
+            }
+
+            .navbar.scrolled .company-name {
+                font-size: 18px;
+            }
+
+            .company-name-amharic {
+                display: none;
+            }
+
             .hero-text h1 {
                 font-size: 2rem;
             }
@@ -904,46 +1242,64 @@
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <a href="#home" class="navbar-brand">
-                    <img src="images/zemalogo.png" alt="Zema Logo">
-                    Zema Lab
-                </a>
-                
-                <ul class="navbar-nav">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#process" class="nav-link">Process</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                
-                <div class="navbar-actions">
-                    <button class="btn btn-primary" onclick="openModal()">
-                        <i class="bi bi-calendar-check"></i>
-                        Book Test
-                    </button>
+        <div class="navbar-content">
+            <a href="#home" class="logo-section">
+                <div class="logo-icon">
+                    <img src="images/Zema_microscope_logo.jpg" alt="Zema Microscope Logo">
                 </div>
-                
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                    <i class="bi bi-list"></i>
+                <div class="logo-text">
+                    <h1 class="company-name" data-en="Zema Diagnostic Laboratory" data-am="ዜማ የምርመራ ማዕከል">Zema Diagnostic Laboratory</h1>
+                    <p class="company-name-amharic" data-en="ዜማ የምርመራ ማዕከል" data-am="Zema Diagnostic Laboratory">ዜማ የምርመራ ማዕከል</p>
+                </div>
+            </a>
+            
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('en')">
+                    <span>🇬🇧</span>
+                    <span>EN</span>
+                </button>
+                <button class="lang-btn" onclick="switchLanguage('am')">
+                    <span>🇪🇹</span>
+                    <span>አማ</span>
                 </button>
             </div>
             
-            <div class="mobile-menu" id="mobileMenu">
+            <nav class="nav-section">
                 <ul class="navbar-nav">
-                    <li><a href="#home" class="nav-link" onclick="closeMobileMenu()">Home</a></li>
-                    <li><a href="#about" class="nav-link" onclick="closeMobileMenu()">About</a></li>
-                    <li><a href="#services" class="nav-link" onclick="closeMobileMenu()">Services</a></li>
-                    <li><a href="#process" class="nav-link" onclick="closeMobileMenu()">Process</a></li>
-                    <li><a href="#contact" class="nav-link" onclick="closeMobileMenu()">Contact</a></li>
+                    <li><a href="#home" class="nav-link active" data-en="Home" data-am="ዋና ገጽ">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a></li>
+                    <li><a href="#services" class="nav-link" data-en="Services" data-am="አገልግሎቶች">Services</a></li>
+                    <li><a href="#process" class="nav-link" data-en="Process" data-am="ሂደት">Process</a></li>
+                    <li><a href="#contact" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a></li>
                 </ul>
-                <button class="btn btn-primary" onclick="openModal(); closeMobileMenu();">
+                
+                <button class="btn btn-primary" onclick="openModal()">
                     <i class="bi bi-calendar-check"></i>
-                    Book Test
+                    <span data-en="Book Test" data-am="ምርመራ ይመዝግቡ">Book Test</span>
                 </button>
+            </nav>
+                
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="lang-btn" onclick="switchLanguage('am')">አማርኛ</button>
             </div>
+            <ul class="navbar-nav">
+                <li><a href="#home" class="nav-link" onclick="closeMobileMenu()" data-en="Home" data-am="ዋና ገጽ">Home</a></li>
+                <li><a href="#about" class="nav-link" onclick="closeMobileMenu()" data-en="About" data-am="ስለ እኛ">About</a></li>
+                <li><a href="#services" class="nav-link" onclick="closeMobileMenu()" data-en="Services" data-am="አገልግሎቶች">Services</a></li>
+                <li><a href="#process" class="nav-link" onclick="closeMobileMenu()" data-en="Process" data-am="ሂደት">Process</a></li>
+                <li><a href="#contact" class="nav-link" onclick="closeMobileMenu()" data-en="Contact" data-am="አድራሻ">Contact</a></li>
+            </ul>
+            <button class="btn btn-primary" onclick="openModal(); closeMobileMenu();">
+                <i class="bi bi-calendar-check"></i>
+                <span data-en="Book Test" data-am="ምርመራ ይመዝግቡ">Book Test</span>
+            </button>
         </div>
     </nav>
 
@@ -952,18 +1308,18 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text" data-aos="fade-up">
-                    <h1 class="text-gradient">Advanced Medical Diagnostics for Better Health</h1>
-                    <p class="subtitle">
+                    <h1 class="text-gradient" data-en="Advanced Medical Diagnostics for Better Health" data-am="ለተሻለ ጤንነት የላቀ የሕክምና ምርመራ">Advanced Medical Diagnostics for Better Health</h1>
+                    <p class="subtitle" data-en="Leading diagnostic laboratory providing accurate, reliable medical testing with state-of-the-art equipment and expert care. Your health is our priority." data-am="በተሸለሙ መሳሪያዎች እና በባለሙያ እንክብካቤ ትክክለኛ፣ አስተማማኝ የሕክምና ምርመራ የሚሰጥ ግንባር ቀደም የምርመራ ቤተ ሙከራ። የእርስዎ ጤንነት የእኛ ቅድሚያ ነው።">
                         Leading diagnostic laboratory providing accurate, reliable medical testing with state-of-the-art equipment and expert care. Your health is our priority.
                     </p>
                     <div class="hero-actions">
                         <button class="btn btn-primary" onclick="openModal()">
                             <i class="bi bi-calendar-check"></i>
-                            Book Appointment
+                            <span data-en="Book Appointment" data-am="ቀጠሮ ይመዝግቡ">Book Appointment</span>
                         </button>
                         <a href="#services" class="btn btn-outline">
                             <i class="bi bi-arrow-down"></i>
-                            View Services
+                            <span data-en="View Services" data-am="አገልግሎቶችን ይመልከቱ">View Services</span>
                         </a>
                     </div>
                 </div>
@@ -977,8 +1333,8 @@
                                 <i class="bi bi-check-lg"></i>
                             </div>
                             <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">99.9% Accuracy</div>
-                                <div style="font-size: 0.875rem; color: var(--text-secondary);">Reliable Results</div>
+                                <div style="font-weight: 600; color: var(--text-primary);" data-en="99.9% Accuracy" data-am="99.9% ትክክለኛነት">99.9% Accuracy</div>
+                                <div style="font-size: 0.875rem; color: var(--text-secondary);" data-en="Reliable Results" data-am="አስተማማኝ ውጤቶች">Reliable Results</div>
                             </div>
                         </div>
                     </div>
@@ -989,8 +1345,8 @@
                                 <i class="bi bi-clock"></i>
                             </div>
                             <div>
-                                <div style="font-weight: 600; color: var(--text-primary);">24-48 Hours</div>
-                                <div style="font-size: 0.875rem; color: var(--text-secondary);">Fast Turnaround</div>
+                                <div style="font-weight: 600; color: var(--text-primary);" data-en="24-48 Hours" data-am="24-48 ሰዓት">24-48 Hours</div>
+                                <div style="font-size: 0.875rem; color: var(--text-secondary);" data-en="Fast Turnaround" data-am="ፈጣን አገልግሎት">Fast Turnaround</div>
                             </div>
                         </div>
                     </div>
@@ -1005,19 +1361,19 @@
             <div class="stats-grid">
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
                     <span class="stat-number">15,000+</span>
-                    <span class="stat-label">Tests Performed</span>
+                    <span class="stat-label" data-en="Tests Performed" data-am="የተከናወኑ ምርመራዎች">Tests Performed</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
                     <span class="stat-number">99.9%</span>
-                    <span class="stat-label">Accuracy Rate</span>
+                    <span class="stat-label" data-en="Accuracy Rate" data-am="የትክክለኛነት መጠን">Accuracy Rate</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
                     <span class="stat-number">24-48</span>
-                    <span class="stat-label">Hours Turnaround</span>
+                    <span class="stat-label" data-en="Hours Turnaround" data-am="ሰዓት የማዞሪያ ጊዜ">Hours Turnaround</span>
                 </div>
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
                     <span class="stat-number">50+</span>
-                    <span class="stat-label">Test Parameters</span>
+                    <span class="stat-label" data-en="Test Parameters" data-am="የምርመራ መስፈርቶች">Test Parameters</span>
                 </div>
             </div>
         </div>
@@ -1028,11 +1384,11 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text" data-aos="fade-right">
-                    <h2 class="text-gradient">Excellence in Medical Diagnostics</h2>
-                    <p>
+                    <h2 class="text-gradient" data-en="Excellence in Medical Diagnostics" data-am="በህክምና ምርመራ ውስጥ ቀዳሚነት">Excellence in Medical Diagnostics</h2>
+                    <p data-en="Zema Diagnostic Laboratory has been at the forefront of medical testing, providing healthcare providers and patients with accurate, timely results that make a difference in treatment decisions." data-am="ዘማ የመርመራ ቤተ ሙከራ በህክምና ምርመራ ግንባር ቀደም ሆኖ፣ ለጤና አጠባበቅ አቅራቢዎች እና ለታካሚዎች በሕክምና ውሳኔ ላይ ለውጥ የሚያመጡ ትክክለኛና ወቅታዊ ውጤቶችን ይሰጣል።">
                         Zema Diagnostic Laboratory has been at the forefront of medical testing, providing healthcare providers and patients with accurate, timely results that make a difference in treatment decisions.
                     </p>
-                    <p>
+                    <p data-en="Our state-of-the-art facility combines cutting-edge technology with the expertise of skilled professionals to deliver comprehensive diagnostic services across a wide range of specialties." data-am="የእኛ የመሃል ዘመን ተቋም ዘመናዊ ቴክኖሎጂን ከባለሙያዎች እውቀት ጋር በማጣመር በተለያዩ ስፔሻሊቲዎች ላይ ሰፊ የምርመራ አገልግሎት ይሰጣል።">
                         Our state-of-the-art facility combines cutting-edge technology with the expertise of skilled professionals to deliver comprehensive diagnostic services across a wide range of specialties.
                     </p>
                     
@@ -1041,31 +1397,31 @@
                             <div class="feature-icon">
                                 <i class="bi bi-check-lg"></i>
                             </div>
-                            <span>Advanced Equipment</span>
+                            <span data-en="Advanced Equipment" data-am="የላቀ መሳሪያ">Advanced Equipment</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
                                 <i class="bi bi-check-lg"></i>
                             </div>
-                            <span>Expert Staff</span>
+                            <span data-en="Expert Staff" data-am="የባለሙያ ሰራተኞች">Expert Staff</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
                                 <i class="bi bi-check-lg"></i>
                             </div>
-                            <span>Fast Results</span>
+                            <span data-en="Fast Results" data-am="ፈጣን ውጤቶች">Fast Results</span>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon">
                                 <i class="bi bi-check-lg"></i>
                             </div>
-                            <span>Quality Assurance</span>
+                            <span data-en="Quality Assurance" data-am="የጥራት ማረጋገጫ">Quality Assurance</span>
                         </div>
                     </div>
                     
                     <button class="btn btn-primary">
                         <i class="bi bi-arrow-right"></i>
-                        Learn More
+                        <span data-en="Learn More" data-am="ተጨማሪ ይወቁ">Learn More</span>
                     </button>
                 </div>
                 
@@ -1080,8 +1436,8 @@
     <section id="services" class="services">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="text-gradient">Our Diagnostic Services</h2>
-                <p>Comprehensive medical testing services using advanced technology and expert analysis</p>
+                <h2 class="text-gradient" data-en="Our Diagnostic Services" data-am="የእኛ ምርመራ አገልግሎቶች">Our Diagnostic Services</h2>
+                <p data-en="Comprehensive medical testing services using advanced technology and expert analysis" data-am="የላቀ ቴክኖሎጂና የባለሙያ ትንተና የሚጠቀም ሰፊ የሕክምና ምርመራ አገልግሎቶች">Comprehensive medical testing services using advanced technology and expert analysis</p>
             </div>
             
             <div class="services-grid">
@@ -1090,14 +1446,14 @@
                         <div class="service-icon">
                             <i class="bi bi-droplet-half"></i>
                         </div>
-                        <h3>Hematology</h3>
+                        <h3 data-en="Hematology" data-am="የደም ምርመራ">Hematology</h3>
                     </div>
-                    <p>Complete blood count (CBC) and comprehensive blood analysis to detect anemia, infections, and other critical conditions.</p>
+                    <p data-en="Complete blood count (CBC) and comprehensive blood analysis to detect anemia, infections, and other critical conditions." data-am="የደም እጥረት፣ ኢንፌክሽንና ሌሎች ወሳኝ ሁኔታዎችን ለመለየት የሚደረግ ሙሉ የደም ቆጠራ እና ሰፊ የደም ትንተና።">Complete blood count (CBC) and comprehensive blood analysis to detect anemia, infections, and other critical conditions.</p>
                     <ul class="service-features">
-                        <li>Complete Blood Count (CBC)</li>
-                        <li>Blood Smear Analysis</li>
-                        <li>Coagulation Studies</li>
-                        <li>ESR & CRP Testing</li>
+                        <li data-en="Complete Blood Count (CBC)" data-am="ሙሉ የደም ቆጠራ">Complete Blood Count (CBC)</li>
+                        <li data-en="Blood Smear Analysis" data-am="የደም ተጋላጭነት ትንተና">Blood Smear Analysis</li>
+                        <li data-en="Coagulation Studies" data-am="የደም መጨናነቅ ጥናት">Coagulation Studies</li>
+                        <li data-en="ESR & CRP Testing" data-am="ኢ.ኤስ.አር እና ሲ.አር.ፒ ምርመራ">ESR & CRP Testing</li>
                     </ul>
                 </div>
                 
@@ -1106,14 +1462,14 @@
                         <div class="service-icon">
                             <i class="bi bi-heart-pulse"></i>
                         </div>
-                        <h3>Clinical Chemistry</h3>
+                        <h3 data-en="Clinical Chemistry" data-am="ክሊኒካል ኬሚስትሪ">Clinical Chemistry</h3>
                     </div>
-                    <p>Detailed biochemical analysis including lipid profiles, liver function, and kidney function tests.</p>
+                    <p data-en="Detailed biochemical analysis including lipid profiles, liver function, and kidney function tests." data-am="የሊፒድ መገለጫዎች፣ የከበድ ተግባር እና የኩላሊት ተግባር ምርመራዎችን ጨምሮ ዝርዝር ባዮኬሚካላዊ ትንተና።">Detailed biochemical analysis including lipid profiles, liver function, and kidney function tests.</p>
                     <ul class="service-features">
-                        <li>Lipid Profile</li>
-                        <li>Liver Function Tests</li>
-                        <li>Kidney Function Tests</li>
-                        <li>Diabetes Monitoring</li>
+                        <li data-en="Lipid Profile" data-am="የሊፒድ መገለጫ">Lipid Profile</li>
+                        <li data-en="Liver Function Tests" data-am="የከበድ ተግባር ምርመራዎች">Liver Function Tests</li>
+                        <li data-en="Kidney Function Tests" data-am="የኩላሊት ተግባር ምርመራዎች">Kidney Function Tests</li>
+                        <li data-en="Diabetes Monitoring" data-am="የስኳር ህመም ክትትል">Diabetes Monitoring</li>
                     </ul>
                 </div>
                 
@@ -1122,14 +1478,14 @@
                         <div class="service-icon">
                             <i class="bi bi-lightning-charge"></i>
                         </div>
-                        <h3>Electrolytes & Minerals</h3>
+                        <h3 data-en="Electrolytes & Minerals" data-am="ኤሌክትሮላይቶችና ማዕድናት">Electrolytes & Minerals</h3>
                     </div>
-                    <p>Measurement of essential electrolytes and minerals for optimal body function and metabolic health.</p>
+                    <p data-en="Measurement of essential electrolytes and minerals for optimal body function and metabolic health." data-am="ለአግባብነት ያለው የሰውነት ተግባር እና የሜታቦሊክ ጤንነት አስፈላጊ የሆኑ ኤሌክትሮላይቶችና ማዕድናት መለኪያ።">Measurement of essential electrolytes and minerals for optimal body function and metabolic health.</p>
                     <ul class="service-features">
-                        <li>Sodium & Potassium</li>
-                        <li>Calcium & Phosphorus</li>
-                        <li>Magnesium & Chloride</li>
-                        <li>Trace Elements</li>
+                        <li data-en="Sodium & Potassium" data-am="ሶዲየምና ፖታሲየም">Sodium & Potassium</li>
+                        <li data-en="Calcium & Phosphorus" data-am="ካልሲየምና ፎስፎረስ">Calcium & Phosphorus</li>
+                        <li data-en="Magnesium & Chloride" data-am="ማግኒዝየምና ክሎራይድ">Magnesium & Chloride</li>
+                        <li data-en="Trace Elements" data-am="ትንሽ ንጥረ ነገሮች">Trace Elements</li>
                     </ul>
                 </div>
                 
@@ -1138,14 +1494,14 @@
                         <div class="service-icon">
                             <i class="bi bi-activity"></i>
                         </div>
-                        <h3>Cardiac Markers</h3>
+                        <h3 data-en="Cardiac Markers" data-am="የልብ አመላካቾች">Cardiac Markers</h3>
                     </div>
-                    <p>Early detection of heart conditions with comprehensive cardiac enzyme testing and biomarkers.</p>
+                    <p data-en="Early detection of heart conditions with comprehensive cardiac enzyme testing and biomarkers." data-am="ሰፊ የልብ ኢንዛይም ምርመራና ባዮማርከሮች የልብ ሁኔታዎችን ቀደም ብሎ መለየት።">Early detection of heart conditions with comprehensive cardiac enzyme testing and biomarkers.</p>
                     <ul class="service-features">
-                        <li>Troponin I & T</li>
-                        <li>CK-MB</li>
-                        <li>LDH</li>
-                        <li>BNP/NT-proBNP</li>
+                        <li data-en="Troponin I & T" data-am="ትሮፖኒን አይ እና ቲ">Troponin I & T</li>
+                        <li data-en="CK-MB" data-am="ሲ.ኬ-ኤም.ቢ">CK-MB</li>
+                        <li data-en="LDH" data-am="ኤል.ዲ.ኤች">LDH</li>
+                        <li data-en="BNP/NT-proBNP" data-am="ቢ.ኤን.ፒ/ኤን.ቲ-ፕሮቢ.ኤን.ፒ">BNP/NT-proBNP</li>
                     </ul>
                 </div>
                 
@@ -1154,14 +1510,14 @@
                         <div class="service-icon">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <h3>Cancer Markers</h3>
+                        <h3 data-en="Cancer Markers" data-am="የካንሰር አመላካቾች">Cancer Markers</h3>
                     </div>
-                    <p>Screening for important cancer indicators for early detection and monitoring treatment response.</p>
+                    <p data-en="Screening for important cancer indicators for early detection and monitoring treatment response." data-am="ቀደም ብሎ ለመለየት እና የሕክምና ምላሽን ለመከታተል አስፈላጊ የካንሰር አመላካቾች ምርመራ።">Screening for important cancer indicators for early detection and monitoring treatment response.</p>
                     <ul class="service-features">
-                        <li>PSA (Prostate)</li>
-                        <li>CA-125 (Ovarian)</li>
-                        <li>CEA (Colorectal)</li>
-                        <li>AFP (Liver)</li>
+                        <li data-en="PSA (Prostate)" data-am="ፒ.ኤስ.ኤ (ፕሮስቴት)">PSA (Prostate)</li>
+                        <li data-en="CA-125 (Ovarian)" data-am="ሲ.ኤ-125 (የእንቁላል ቀዳዳ)">CA-125 (Ovarian)</li>
+                        <li data-en="CEA (Colorectal)" data-am="ሲ.ኢ.ኤ (የአንጀት)">CEA (Colorectal)</li>
+                        <li data-en="AFP (Liver)" data-am="ኤ.ኤፍ.ፒ (ከበድ)">AFP (Liver)</li>
                     </ul>
                 </div>
                 
@@ -1170,14 +1526,14 @@
                         <div class="service-icon">
                             <i class="bi bi-capsule-pill"></i>
                         </div>
-                        <h3>Vitamin & Hormones</h3>
+                        <h3 data-en="Vitamin & Hormones" data-am="ቪታሚንና ሆርሞኖች">Vitamin & Hormones</h3>
                     </div>
-                    <p>Comprehensive vitamin and hormone testing to identify deficiencies and optimize health.</p>
+                    <p data-en="Comprehensive vitamin and hormone testing to identify deficiencies and optimize health." data-am="እጥረቶችን ለመለየት እና ጤንነትን ለማሻሻል ሰፊ የቪታሚንና ሆርሞን ምርመራ።">Comprehensive vitamin and hormone testing to identify deficiencies and optimize health.</p>
                     <ul class="service-features">
-                        <li>Vitamin D, B12, Folate</li>
-                        <li>Thyroid Function</li>
-                        <li>Sex Hormones</li>
-                        <li>Cortisol</li>
+                        <li data-en="Vitamin D, B12, Folate" data-am="ቪታሚን ዲ፣ ቢ12፣ ፎሌት">Vitamin D, B12, Folate</li>
+                        <li data-en="Thyroid Function" data-am="የሸንተ-ፈሳሽ ተግባር">Thyroid Function</li>
+                        <li data-en="Sex Hormones" data-am="የወሲብ ሆርሞኖች">Sex Hormones</li>
+                        <li data-en="Cortisol" data-am="ኮርቲዞል">Cortisol</li>
                     </ul>
                 </div>
             </div>
@@ -1188,33 +1544,33 @@
     <section id="process" class="process">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="text-gradient">Our Testing Process</h2>
-                <p>Simple, efficient, and reliable - from sample collection to results delivery</p>
+                <h2 class="text-gradient" data-en="Our Testing Process" data-am="የእኛ ምርመራ ሂደት">Our Testing Process</h2>
+                <p data-en="Simple, efficient, and reliable - from sample collection to results delivery" data-am="ቀላል፣ ውጤታማ እና አስተማማኝ - ከናሙና መሰብሰብ እስከ ውጤት ማስተላለፍ">Simple, efficient, and reliable - from sample collection to results delivery</p>
             </div>
             
             <div class="process-steps">
                 <div class="process-step" data-aos="fade-up" data-aos-delay="100">
                     <div class="process-number">1</div>
-                    <h4>Book Appointment</h4>
-                    <p>Schedule your test online or by phone. Choose from home collection or visit our facility.</p>
+                    <h4 data-en="Book Appointment" data-am="ቀጠሮ ይመዝግቡ">Book Appointment</h4>
+                    <p data-en="Schedule your test online or by phone. Choose from home collection or visit our facility." data-am="ምርመራዎትን በመስመር ላይ ወይም በስልክ ይያዙ። የቤት ውስጥ መሰብሰብ ወይም ወደ ተቋማችን መምጣትን ይምረጡ።">Schedule your test online or by phone. Choose from home collection or visit our facility.</p>
                 </div>
                 
                 <div class="process-step" data-aos="fade-up" data-aos-delay="200">
                     <div class="process-number">2</div>
-                    <h4>Sample Collection</h4>
-                    <p>Our trained phlebotomists collect your samples safely and professionally with minimal discomfort.</p>
+                    <h4 data-en="Sample Collection" data-am="ናሙና መሰብሰብ">Sample Collection</h4>
+                    <p data-en="Our trained phlebotomists collect your samples safely and professionally with minimal discomfort." data-am="የሰለጠኑ የደም ላቢዎቻችን ናሙናዎችዎን በአስተማማኝና በሙያዊ መንገድ ዝቅተኛ ምቾት እንዲኖርዎት ይሰበስባሉ።">Our trained phlebotomists collect your samples safely and professionally with minimal discomfort.</p>
                 </div>
                 
                 <div class="process-step" data-aos="fade-up" data-aos-delay="300">
                     <div class="process-number">3</div>
-                    <h4>Laboratory Analysis</h4>
-                    <p>Advanced analyzers and expert technicians process your samples with the highest accuracy standards.</p>
+                    <h4 data-en="Laboratory Analysis" data-am="የቤተ ሙከራ ትንተና">Laboratory Analysis</h4>
+                    <p data-en="Advanced analyzers and expert technicians process your samples with the highest accuracy standards." data-am="የላቀ ተንታኞችና የባለሙያ ቴክኒሻኖች ናሙናዎችዎን በከፍተኛ ትክክለኛነት መስፈርት ይሰራሉ።">Advanced analyzers and expert technicians process your samples with the highest accuracy standards.</p>
                 </div>
                 
                 <div class="process-step" data-aos="fade-up" data-aos-delay="400">
                     <div class="process-number">4</div>
-                    <h4>Results Delivery</h4>
-                    <p>Receive your results within 24-48 hours via secure email, SMS, or through our patient portal.</p>
+                    <h4 data-en="Results Delivery" data-am="ውጤት ማስተላለፍ">Results Delivery</h4>
+                    <p data-en="Receive your results within 24-48 hours via secure email, SMS, or through our patient portal." data-am="ውጤቶችዎን በ24-48 ሰዓት ውስጥ በአስተማማኝ ኢሜይል፣ ኤስ.ኤም.ኤስ ወይም በታካሚዎች ፖርታላችን ያገኛሉ።">Receive your results within 24-48 hours via secure email, SMS, or through our patient portal.</p>
                 </div>
             </div>
         </div>
@@ -1224,46 +1580,46 @@
     <section class="testimonials">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="text-gradient">What Our Patients Say</h2>
-                <p>Trusted by healthcare providers and patients across the region</p>
+                <h2 class="text-gradient" data-en="What Our Patients Say" data-am="ታካሚዎቻችን ምን ይላሉ">What Our Patients Say</h2>
+                <p data-en="Trusted by healthcare providers and patients across the region" data-am="በክልሉ ያሉ የጤና አጠባበቅ አቅራቢዎችና ታካሚዎች የሚያምኑት">Trusted by healthcare providers and patients across the region</p>
             </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="testimonial-content">
+                    <div class="testimonial-content" data-en="The accuracy and speed of Zema Lab's results have been exceptional. Their home collection service is convenient and professional." data-am="የዘማ ላብ ውጤቶች ትክክለኛነትና ፍጥነት ልዩ ነው። የቤት ውስጥ መሰብሰብ አገልግሎታቸው ምቹና ሙያዊ ነው።">
                         "The accuracy and speed of Zema Lab's results have been exceptional. Their home collection service is convenient and professional."
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">DR</div>
                         <div class="testimonial-info">
-                            <h5>Dr. Sarah Ahmed</h5>
-                            <p>Internal Medicine Physician</p>
+                            <h5 data-en="Dr. Sarah Ahmed" data-am="ዶክተር ሳራ አህመድ">Dr. Sarah Ahmed</h5>
+                            <p data-en="Internal Medicine Physician" data-am="የውስጥ ሕክምና ሐኪም">Internal Medicine Physician</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="testimonial-content">
+                    <div class="testimonial-content" data-en="I've been using Zema Lab for my family's health monitoring. The staff is knowledgeable and the facility is state-of-the-art." data-am="ለቤተሰቤ የጤንነት ክትትል ዘማ ላብን እጠቀማለሁ። ሰራተኞቹ እውቀት ያላቸውና ተቋሙ ዘመናዊ ነው።">
                         "I've been using Zema Lab for my family's health monitoring. The staff is knowledgeable and the facility is state-of-the-art."
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">MT</div>
                         <div class="testimonial-info">
-                            <h5>Mohammed Tadesse</h5>
-                            <p>Regular Patient</p>
+                            <h5 data-en="Mohammed Tadesse" data-am="መሐመድ ታደሰ">Mohammed Tadesse</h5>
+                            <p data-en="Regular Patient" data-am="ቋሚ ታካሚ">Regular Patient</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="testimonial-content">
+                    <div class="testimonial-content" data-en="Fast, reliable, and professional service. Zema Lab has become our go-to laboratory for all diagnostic needs." data-am="ፈጣን፣ አስተማማኝና ሙያዊ አገልግሎት። ዘማ ላብ ለሁሉም የምርመራ ፍላጎቶቻችን የምንሄድበት ቤተ ሙከራ ሆኗል።">
                         "Fast, reliable, and professional service. Zema Lab has become our go-to laboratory for all diagnostic needs."
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">AK</div>
                         <div class="testimonial-info">
-                            <h5>Almaz Kebede</h5>
-                            <p>Healthcare Administrator</p>
+                            <h5 data-en="Almaz Kebede" data-am="አልማዝ ከበደ">Almaz Kebede</h5>
+                            <p data-en="Healthcare Administrator" data-am="የጤና አስተዳዳሪ">Healthcare Administrator</p>
                         </div>
                     </div>
                 </div>
@@ -1275,11 +1631,11 @@
     <section class="cta">
         <div class="container">
             <div data-aos="fade-up">
-                <h2>Ready to Take Control of Your Health?</h2>
-                <p>Book your diagnostic tests today and get accurate, reliable results from our expert team</p>
+                <h2 data-en="Ready to Take Control of Your Health?" data-am="የጤንነትዎን ከቦታ ወደ ቦታ መቆጣጠር ዝግጁ ነዎት?">Ready to Take Control of Your Health?</h2>
+                <p data-en="Book your diagnostic tests today and get accurate, reliable results from our expert team" data-am="የምርመራ ቴስቶችዎን ዛሬ ይመዝግቡና ከባለሙያ ቡድናችን ትክክለኛና አስተማማኝ ውጤቶችን ያግኙ">Book your diagnostic tests today and get accurate, reliable results from our expert team</p>
                 <button class="btn btn-white" onclick="openModal()">
                     <i class="bi bi-calendar-check"></i>
-                    Schedule Your Test Now
+                    <span data-en="Schedule Your Test Now" data-am="ምርመራዎን አሁን ይያዙ">Schedule Your Test Now</span>
                 </button>
             </div>
         </div>
@@ -1290,8 +1646,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Zema Diagnostic Laboratory</h4>
-                    <p>Leading the way in advanced medical diagnostics with state-of-the-art equipment and expert care for better health outcomes.</p>
+                    <h4 data-en="Zema Diagnostic Laboratory" data-am="ዜማ የምርመራ ማዕከል">Zema Diagnostic Laboratory</h4>
+                    <p data-en="Leading the way in advanced medical diagnostics with state-of-the-art equipment and expert care for better health outcomes." data-am="ለተሻለ የጤንነት ውጤቶች በዘመናዊ መሳሪያዎችና በባለሙያ እንክብካቤ በላቀ የሕክምና ምርመራ መንገድ እየመራን።">Leading the way in advanced medical diagnostics with state-of-the-art equipment and expert care for better health outcomes.</p>
                     <div style="margin-top: 1rem;">
                         <a href="#" style="margin-right: 1rem; font-size: 1.2rem;"><i class="bi bi-facebook"></i></a>
                         <a href="#" style="margin-right: 1rem; font-size: 1.2rem;"><i class="bi bi-twitter"></i></a>
@@ -1301,42 +1657,45 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contact Information</h4>
-                    <p><i class="bi bi-geo-alt me-2"></i>123 Health Street, Medical District</p>
+                    <h4 data-en="Contact Information" data-am="የመገኛ መረጃ">Contact Information</h4>
+                    <p><i class="bi bi-geo-alt me-2"></i><span data-en="123 Health Street, Medical District" data-am="123 የጤንነት ጎዳና፣ የሕክምና ክፍለ ከተማ">123 Health Street, Medical District</span></p>
                     <p><i class="bi bi-telephone me-2"></i><a href="tel:+1234567890">+1 (234) 567-890</a></p>
                     <p><i class="bi bi-envelope me-2"></i><a href="mailto:info@zemalab.com">info@zemalab.com</a></p>
-                    <p><i class="bi bi-clock me-2"></i>Mon-Fri: 7:00 AM - 7:00 PM</p>
+                    <p><i class="bi bi-clock me-2"></i><span data-en="Mon-Fri: 7:00 AM - 7:00 PM" data-am="ሰኞ-አርብ፡ ከጧት 7፡00 - ከቀትር 7፡00">Mon-Fri: 7:00 AM - 7:00 PM</span></p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Our Services</h4>
-                    <p><a href="#services">Hematology Testing</a></p>
-                    <p><a href="#services">Clinical Chemistry</a></p>
-                    <p><a href="#services">Cardiac Markers</a></p>
-                    <p><a href="#services">Cancer Screening</a></p>
-                    <p><a href="#services">Vitamin Analysis</a></p>
+                    <h4 data-en="Our Services" data-am="አገልግሎቶቻችን">Our Services</h4>
+                    <p><a href="#services" data-en="Hematology Testing" data-am="የደም ምርመራ">Hematology Testing</a></p>
+                    <p><a href="#services" data-en="Clinical Chemistry" data-am="ክሊኒካል ኬሚስትሪ">Clinical Chemistry</a></p>
+                    <p><a href="#services" data-en="Cardiac Markers" data-am="የልብ አመላካቾች">Cardiac Markers</a></p>
+                    <p><a href="#services" data-en="Cancer Screening" data-am="የካንሰር ምርመራ">Cancer Screening</a></p>
+                    <p><a href="#services" data-en="Vitamin Analysis" data-am="የቪታሚን ትንተና">Vitamin Analysis</a></p>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <p><a href="#about">About Us</a></p>
-                    <p><a href="#services">Services</a></p>
-                    <p><a href="#process">How It Works</a></p>
-                    <p><a href="#contact">Contact</a></p>
-                    <p><a href="#" onclick="openModal()">Book Test</a></p>
+                    <h4 data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
+                    <p><a href="#about" data-en="About Us" data-am="ስለ እኛ">About Us</a></p>
+                    <p><a href="#services" data-en="Services" data-am="አገልግሎቶች">Services</a></p>
+                    <p><a href="#process" data-en="How It Works" data-am="እንዴት እንደሚሰራ">How It Works</a></p>
+                    <p><a href="#contact" data-en="Contact" data-am="አድራሻ">Contact</a></p>
+                    <p><a href="#" onclick="openModal()" data-en="Book Test" data-am="ምርመራ ይመዝግቡ">Book Test</a></p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div class="footer-bottom-content">
                     <div>
-                        <p>&copy; 2025 Zema Diagnostic Laboratory. All rights reserved.</p>
+                        <a href="https://kemerhabesha.com" target="_blank" class="powered-by">
+                            <img src="images/Kemer_Kicon_color.jpg" alt="Kemer Habesha" class="powered-by-logo">
+                            <div class="powered-by-text">
+                                <div class="powered-by-label">Powered by</div>
+                                <div class="powered-by-brand">Kemer Habesha</div>
+                            </div>
+                        </a>
                     </div>
                     <div>
-                        <a href="https://kemerhabesha.com" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;">
-                            <img src="images/Kemer_Kicon_color.jpg" alt="Kemer Habesha" style="height: 24px; border-radius: 4px;">
-                            Powered by Kemer Habesha
-                        </a>
+                        <p data-en="&copy; 2025 Zema Diagnostic Laboratory. All rights reserved." data-am="&copy; 2025 ዜማ የምርመራ ማዕከል። ሁሉም መብቶች የተጠበቁ ናቸው།">&copy; 2025 Zema Diagnostic Laboratory. All rights reserved.</p>
                     </div>
                 </div>
             </div>
@@ -1347,7 +1706,7 @@
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="bi bi-calendar-check me-2 text-primary"></i>Book Your Test</h3>
+                <h3><i class="bi bi-calendar-check me-2 text-primary"></i><span data-en="Book Your Test" data-am="ምርመራዎን ይመዝግቡ">Book Your Test</span></h3>
                 <button class="modal-close" onclick="closeModal()">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -1355,67 +1714,67 @@
             
             <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
                 <div class="form-group">
-                    <label for="fullName" class="form-label">Full Name *</label>
-                    <input type="text" id="fullName" class="form-control" required placeholder="Enter your full name">
+                    <label for="fullName" class="form-label" data-en="Full Name *" data-am="ሙሉ ስም *">Full Name *</label>
+                    <input type="text" id="fullName" class="form-control" required data-en-placeholder="Enter your full name" data-am-placeholder="ሙሉ ስምዎን ያስገቡ" placeholder="Enter your full name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email" class="form-label">Email Address *</label>
-                    <input type="email" id="email" class="form-control" required placeholder="Enter your email">
+                    <label for="email" class="form-label" data-en="Email Address *" data-am="ኢሜይል አድራሻ *">Email Address *</label>
+                    <input type="email" id="email" class="form-control" required data-en-placeholder="Enter your email" data-am-placeholder="ኢሜይልዎን ያስገቡ" placeholder="Enter your email">
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone" class="form-label">Phone Number *</label>
-                    <input type="tel" id="phone" class="form-control" required placeholder="Enter your phone number">
+                    <label for="phone" class="form-label" data-en="Phone Number *" data-am="ስልክ ቁጥር *">Phone Number *</label>
+                    <input type="tel" id="phone" class="form-control" required data-en-placeholder="Enter your phone number" data-am-placeholder="ስልክ ቁጥርዎን ያስገቡ" placeholder="Enter your phone number">
                 </div>
                 
                 <div class="form-group">
-                    <label for="testType" class="form-label">Test Type *</label>
+                    <label for="testType" class="form-label" data-en="Test Type *" data-am="የምርመራ ዓይነት *">Test Type *</label>
                     <select id="testType" class="form-control" required>
-                        <option value="">Select a test type</option>
-                        <option value="hematology">Complete Blood Count (CBC)</option>
-                        <option value="chemistry">Clinical Chemistry Panel</option>
-                        <option value="lipid">Lipid Profile</option>
-                        <option value="cardiac">Cardiac Markers</option>
-                        <option value="cancer">Cancer Markers</option>
-                        <option value="vitamins">Vitamin Panel</option>
-                        <option value="hormones">Hormone Testing</option>
-                        <option value="general">General Health Screening</option>
-                        <option value="custom">Custom Test Package</option>
+                        <option value="" data-en="Select a test type" data-am="የምርመራ ዓይነት ይምረጡ">Select a test type</option>
+                        <option value="hematology" data-en="Complete Blood Count (CBC)" data-am="ሙሉ የደም ቆጠራ">Complete Blood Count (CBC)</option>
+                        <option value="chemistry" data-en="Clinical Chemistry Panel" data-am="ክሊኒካል ኬሚስትሪ ፓኔል">Clinical Chemistry Panel</option>
+                        <option value="lipid" data-en="Lipid Profile" data-am="የሊፒድ መገለጫ">Lipid Profile</option>
+                        <option value="cardiac" data-en="Cardiac Markers" data-am="የልብ አመላካቾች">Cardiac Markers</option>
+                        <option value="cancer" data-en="Cancer Markers" data-am="የካንሰር አመላካቾች">Cancer Markers</option>
+                        <option value="vitamins" data-en="Vitamin Panel" data-am="የቪታሚን ፓኔል">Vitamin Panel</option>
+                        <option value="hormones" data-en="Hormone Testing" data-am="የሆርሞን ምርመራ">Hormone Testing</option>
+                        <option value="general" data-en="General Health Screening" data-am="አጠቃላይ የጤንነት ምርመራ">General Health Screening</option>
+                        <option value="custom" data-en="Custom Test Package" data-am="ብጁ የምርመራ ፓኬጅ">Custom Test Package</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="collectionType" class="form-label">Collection Method *</label>
+                    <label for="collectionType" class="form-label" data-en="Collection Method *" data-am="የመሰብሰብ ዘዴ *">Collection Method *</label>
                     <select id="collectionType" class="form-control" required>
-                        <option value="">Select collection method</option>
-                        <option value="facility">Visit Laboratory Facility</option>
-                        <option value="home">Home Collection Service</option>
+                        <option value="" data-en="Select collection method" data-am="የመሰብሰብ ዘዴ ይምረጡ">Select collection method</option>
+                        <option value="facility" data-en="Visit Laboratory Facility" data-am="ቤተ ሙከራ ተቋም ይጎብኙ">Visit Laboratory Facility</option>
+                        <option value="home" data-en="Home Collection Service" data-am="የቤት ውስጥ መሰብሰብ አገልግሎት">Home Collection Service</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="preferredDate" class="form-label">Preferred Date *</label>
+                    <label for="preferredDate" class="form-label" data-en="Preferred Date *" data-am="የተመረጠ ቀን *">Preferred Date *</label>
                     <input type="date" id="preferredDate" class="form-control" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="preferredTime" class="form-label">Preferred Time</label>
+                    <label for="preferredTime" class="form-label" data-en="Preferred Time" data-am="የተመረጠ ሰዓት">Preferred Time</label>
                     <select id="preferredTime" class="form-control">
-                        <option value="">Select preferred time</option>
-                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
-                        <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
-                        <option value="evening">Evening (4:00 PM - 7:00 PM)</option>
+                        <option value="" data-en="Select preferred time" data-am="የተመረጠ ሰዓት ይምረጡ">Select preferred time</option>
+                        <option value="morning" data-en="Morning (8:00 AM - 12:00 PM)" data-am="ጧት (ከጧት 8፡00 - 12፡00)">Morning (8:00 AM - 12:00 PM)</option>
+                        <option value="afternoon" data-en="Afternoon (12:00 PM - 4:00 PM)" data-am="ከሰዓት በኋላ (12፡00 - 4፡00)">Afternoon (12:00 PM - 4:00 PM)</option>
+                        <option value="evening" data-en="Evening (4:00 PM - 7:00 PM)" data-am="ማታ (4፡00 - 7፡00)">Evening (4:00 PM - 7:00 PM)</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="notes" class="form-label">Additional Notes</label>
-                    <textarea id="notes" class="form-control" rows="3" placeholder="Any special requirements or questions?"></textarea>
+                    <label for="notes" class="form-label" data-en="Additional Notes" data-am="ተጨማሪ ማስታወሻዎች">Additional Notes</label>
+                    <textarea id="notes" class="form-control" rows="3" data-en-placeholder="Any special requirements or questions?" data-am-placeholder="ማንኛውም ልዩ መስፈርቶች ወይም ጥያቄዎች?" placeholder="Any special requirements or questions?"></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="bi bi-send me-2"></i>Submit Appointment Request
+                    <i class="bi bi-send me-2"></i><span data-en="Submit Appointment Request" data-am="የቀጠሮ ጥያቄ ይላኩ">Submit Appointment Request</span>
                 </button>
             </form>
         </div>
@@ -1426,6 +1785,73 @@
     
     <!-- Custom JavaScript -->
     <script>
+        // Language switching functionality
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+                const translation = element.getAttribute('data-' + lang);
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-' + lang + '-placeholder]').forEach(element => {
+                const placeholder = element.getAttribute('data-' + lang + '-placeholder');
+                if (placeholder) {
+                    element.placeholder = placeholder;
+                }
+            });
+            
+            // Update form options
+            updateFormOptions(lang);
+            
+            // Apply font for Amharic
+            if (lang === 'am') {
+                document.body.setAttribute('lang', 'am');
+            } else {
+                document.body.removeAttribute('lang');
+            }
+            
+            // Save language preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        function updateFormOptions(lang) {
+            const selectElements = document.querySelectorAll('select option');
+            selectElements.forEach(option => {
+                const translation = option.getAttribute('data-' + lang);
+                if (translation) {
+                    option.textContent = translation;
+                }
+            });
+        }
+
+        // Load saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-language') || 'en';
+            if (savedLang !== 'en') {
+                // Find the language button and trigger the switch
+                const langBtn = document.querySelector('.lang-btn[onclick*="' + savedLang + '"]');
+                if (langBtn) {
+                    langBtn.click();
+                }
+            }
+        });
+
         // Initialize AOS
         AOS.init({
             duration: 800,
@@ -1476,19 +1902,6 @@
             const mobileMenu = document.getElementById('mobileMenu');
             const toggleBtn = document.querySelector('.mobile-menu-toggle');
             
-            mobileMenu.classList.toggle('active');
-            
-            if (mobileMenu.classList.contains('active')) {
-                toggleBtn.innerHTML = '<i class="bi bi-x-lg"></i>';
-            } else {
-                toggleBtn.innerHTML = '<i class="bi bi-list"></i>';
-            }
-        }
-
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const toggleBtn = document.querySelector('.mobile-menu-toggle');
-            
             mobileMenu.classList.remove('active');
             toggleBtn.innerHTML = '<i class="bi bi-list"></i>';
         }
@@ -1525,9 +1938,14 @@
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
             
+            // Show appropriate message based on language
+            const successMessage = currentLanguage === 'am' 
+                ? 'የቀጠሮ ጥያቄዎት ላስገባቸዋት እናመሰግናለን! በ24 ሰዓት ውስጥ ቀጠሮዎን ለማረጋገጥ እናገኝዎታለን።'
+                : 'Thank you for your appointment request! We will contact you within 24 hours to confirm your booking and provide any additional instructions.';
+            
             // Simulate form submission (replace with actual API call)
             setTimeout(() => {
-                alert('Thank you for your appointment request! We will contact you within 24 hours to confirm your booking and provide any additional instructions.');
+                alert(successMessage);
                 closeModal();
                 event.target.reset();
             }, 1000);
@@ -1535,7 +1953,11 @@
             // Show loading state
             const submitBtn = event.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Submitting...';
+            const loadingText = currentLanguage === 'am' 
+                ? '<i class="bi bi-hourglass-split me-2"></i>በመላክ ላይ...'
+                : '<i class="bi bi-hourglass-split me-2"></i>Submitting...';
+            
+            submitBtn.innerHTML = loadingText;
             submitBtn.disabled = true;
             
             setTimeout(() => {
