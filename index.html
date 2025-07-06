@@ -197,36 +197,31 @@
         }
 
         .carousel-indicators {
-            bottom: 20px;
+            bottom: 1.5rem;
             z-index: 10;
             margin-bottom: 0;
         }
 
         .carousel-indicators button {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin: 0 5px;
-            transition: all 0.3s ease;
-            opacity: 0.6;
-            backdrop-filter: blur(2px);
+            background-color: #ffffff80;
+            border: none;
+            margin: 0 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
         }
 
         .carousel-indicators button:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: scale(1.2);
-            opacity: 0.9;
+            background-color: #ffffffcc;
+            transform: scale(1.1);
         }
 
         .carousel-indicators button.active {
-            background-color: rgba(37, 99, 235, 0.9);
-            border-color: rgba(255, 255, 255, 0.8);
-            transform: scale(1.4);
-            opacity: 1;
-            box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+            background-color: #ffffff;
+            transform: scale(1.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .hero-content {
@@ -661,17 +656,21 @@
             }
 
             .carousel-indicators {
-                bottom: 15px;
+                bottom: 1rem;
             }
 
             .carousel-indicators button {
-                width: 7px;
-                height: 7px;
-                margin: 0 4px;
+                width: 5px;
+                height: 5px;
+                margin: 0 3px;
+            }
+
+            .carousel-indicators button:hover {
+                transform: scale(1.05);
             }
 
             .carousel-indicators button.active {
-                transform: scale(1.3);
+                transform: scale(1.15);
             }
 
             /* Mobile hero content */
@@ -804,13 +803,21 @@
             }
 
             .carousel-indicators {
-                bottom: 10px;
+                bottom: 0.75rem;
             }
 
             .carousel-indicators button {
-                width: 6px;
-                height: 6px;
-                margin: 0 3px;
+                width: 4px;
+                height: 4px;
+                margin: 0 2px;
+            }
+
+            .carousel-indicators button:hover {
+                transform: scale(1.0);
+            }
+
+            .carousel-indicators button.active {
+                transform: scale(1.1);
             }
         }
 
